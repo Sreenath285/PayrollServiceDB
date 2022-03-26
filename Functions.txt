@@ -1,0 +1,78 @@
+mysql> SELECT * from employee_payroll;
++----+-------+--------+--------+------------+
+| id | name  | gender | salary | start      |
++----+-------+--------+--------+------------+
+|  1 | Tony  | M      | 600000 | 2018-01-03 |
+|  2 | Steve | M      | 200000 | 2019-11-14 |
+|  3 | Bruce | M      | 300000 | 2020-05-20 |
+|  4 | Jane  | F      | 400000 | 2021-11-07 |
++----+-------+--------+--------+------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT SUM(salary) FROM employee_payroll
+    -> WHERE gender = 'M' GROUP BY gender;
++-------------+
+| SUM(salary) |
++-------------+
+|     1100000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT SUM(salary) FROM employee_payroll
+    -> WHERE gender = 'F' GROUP BY gender;
++-------------+
+| SUM(salary) |
++-------------+
+|      400000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT gender, SUM(salary) FROM employee_payroll
+    -> GROUP BY gender;
++--------+-------------+
+| gender | SUM(salary) |
++--------+-------------+
+| M      |     1100000 |
+| F      |      400000 |
++--------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT gender, AVG(salary) FROM employee_payroll
+    -> GROUP BY gender;
++--------+-------------------+
+| gender | AVG(salary)       |
++--------+-------------------+
+| M      | 366666.6666666667 |
+| F      |            400000 |
++--------+-------------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT gender, MIN(salary) FROM employee_payroll
+    -> GROUP BY gender;
++--------+-------------+
+| gender | MIN(salary) |
++--------+-------------+
+| M      |      200000 |
+| F      |      400000 |
++--------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT gender, MAX(salary) FROM employee_payroll
+    -> GROUP BY gender;
++--------+-------------+
+| gender | MAX(salary) |
++--------+-------------+
+| M      |      600000 |
+| F      |      400000 |
++--------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT gender, COUNT(salary) FROM employee_payroll
+    -> GROUP BY gender;
++--------+---------------+
+| gender | COUNT(salary) |
++--------+---------------+
+| M      |             3 |
+| F      |             1 |
++--------+---------------+
+2 rows in set (0.00 sec)
